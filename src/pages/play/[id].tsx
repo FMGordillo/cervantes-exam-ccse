@@ -1,5 +1,5 @@
 import invariant from "tiny-invariant";
-import { Answer } from "@prisma/client";
+import type { Answer } from "@prisma/client";
 import { Field, Form, Formik } from "formik";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -8,7 +8,7 @@ import { api } from "~/utils/api";
 import { useLeavePageConfirm } from "~/utils/useLeavePageConfirm";
 
 type InitialValues = {
-  answer: Answer | undefined;
+  answer: string | undefined;
   answers: Answer[];
 };
 
@@ -30,9 +30,9 @@ export default function Play() {
     answers: [],
   };
 
-  const handleFormSubmit = (e: any) => {
-    if (!optionSelected || optionSelected !== e.answer) {
-      setOptionSelected(e.answer);
+  const handleFormSubmit = (values: InitialValues) => {
+    if (!optionSelected || optionSelected !== values.answer) {
+      setOptionSelected(values.answer);
       return;
     }
 
@@ -97,7 +97,7 @@ export default function Play() {
             )}
           </Formik>
         ) : (
-          <h1>We don't have any question to show here</h1>
+          <h1>We don&apos;t have any question to show here</h1>
         )}
       </main>
     </>

@@ -2,13 +2,12 @@ import { useEffect } from "react";
 import Router from "next/router";
 
 export const useLeavePageConfirm = (
-  shouldConfirm: boolean = true,
-  message: string = "Are you sure want to leave this page?"
+  shouldConfirm = true,
+  message = "Are you sure want to leave this page?"
 ) => {
   useEffect(() => {
     const handleBrowseAway = () => {
       if (shouldConfirm && !window.confirm(message)) {
-        console.log("haber");
         Router.events.emit("routeChangeError");
         throw "Route Canceled";
       }

@@ -9,7 +9,7 @@ export default function Home() {
   const handleNewSession = () => {
     mutateAsync()
       .then((data) => {
-        router.push(`/play/${data.id}`);
+        void router.push(`/play/${data.id}`);
       })
       .catch(() => alert("cannot play :c"));
   };

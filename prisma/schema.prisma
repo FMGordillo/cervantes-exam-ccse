@@ -5,8 +5,12 @@ generator client {
   previewFeatures = ["jsonProtocol"]
 }
 
+// datasource db {
+//   provider = "sqlite"
+//   url      = env("DATABASE_URL")
+// }
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -22,7 +26,7 @@ model Answer {
   id              String    @id @default(cuid())
   text            String
   isCorrectAnswer Boolean
-  question        Question  @relation(fields: [questionId], references: [id])
+  question        Question  @relation(fields: [questionId], references: [id], onDelete: Cascade)
   questionId      String
   sessions        Session[]
   createdAt       DateTime  @default(now())
